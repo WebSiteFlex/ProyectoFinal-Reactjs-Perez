@@ -45,7 +45,7 @@ export const getProductByCategory = (categoryId) => {
   });
 };
 
-export const getProductById = () => {
+export const getProductById = (id) => {
   return new Promise((resolve,reject) => {
     setTimeout(() => {
       // resultP(listProduct.find(prod => {

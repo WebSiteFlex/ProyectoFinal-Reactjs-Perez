@@ -15,7 +15,7 @@ const ItemList = ({ products,id }) => {
                                     <p className={classItem.Stock}>Stock= {l.stock}</p>
                                     <span>Category= {l.category}</span>
                                 </div>
-                                <Link to={`/detail/${id}`} className="btn btn-success">View Detail</Link>
+                                <Link to={`/detail/${l.id}`} className="btn btn-success">View Detail</Link>
                             </div>
                         )
                     })
