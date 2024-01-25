@@ -1,0 +1,10 @@
+.containerCart{
+    width: 100px;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.containerCart img{
+    cursor: pointer;
+}

@@ -1,0 +1,49 @@
+.containerCounter{
+    width: 200px;
+    height: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center ;
+     border-radius: 24px 23px / 22px 50px;
+     cursor: pointer;
+     transition: all 0.3s linear;
+}   
+
+.containerCounter:hover{
+    box-shadow: 0 0 12px 2px black;
+}
+.bLeft{
+    background-color: white;
+    color: black;
+    margin-right: 12px;
+}
+.bRight{
+    background-color: white;
+    color: black;
+    margin-left: 12px;
+}
+.containerImportant{
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: space-around;
+    align-items:center ;
+}
+.containerAddCart{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    
+}
+.h4{
+    color: white;
+    font-size: 20px;
+}
+.addCart{
+    width:200px;
+    font-size: 12px;
+    box-shadow: 0 0 7px  white;
+}
