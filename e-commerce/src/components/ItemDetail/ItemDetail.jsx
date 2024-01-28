@@ -1,50 +1,61 @@
-import {useState} from "react"
-import {Link} from "react-router-dom"
-import ItemCount from "../ItemCount/ItemCount"
-import {useCart} from "../Cart/Cart"
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import ItemCount from '../ItemCount/ItemCount'
+import { useCart } from "../../Context/Context"
+import classItemDetail from "./ItemDetail.module.css"
+import Swal from 'sweetalert2'
 
-const ItemDetail = (id,nameP,price,description,category,img,stock) =>{
+const ItemDetail = ({ id, name, category, img, price, stock, description }) => {
     const [total, setTotal] = useState(0)
-    const {addingItem} = useCart()
 
-    const handleOnAdd = (total) =>{
-        const productParts = {
-            id,nameP,price,total
+    const { addItem } = useCart()
+
+    const handleOnAdd = (total) => {
+        const objProductToAdd = {
+            id, name, price, total
         }
-        addingItem(productParts)
+        addItem(objProductToAdd)
+        Swal.fire({
+            title: "Aggregate amount",
+            text: total,
+            icon: "success"
+        })
         setTotal(total)
+        
+
     }
-    return(
-        <article>
-        <header>
-            <h2>
-                {`name: ${nameP}`}
-            </h2>
-        </header>
-        <picture>
-            <img src={img} alt={nameP} style={{ width: 100}}/>
-        </picture>
-        <section>
-            <p>
-                {`Category: ${category}`}
-            </p>
-            <p>
-             {`Description: ${description}`}
-            </p>
-            <p>
-             {`Price: ${price}`}
-            </p>
-        </section>           
-        <footer>
-            {
-                total === 0 ? (
-                    <ItemCount onAdd={handleOnAdd} stock={stock}/>
-                ) : (
-                    <Link to='/cart'>finalize purchase</Link>
-                )
-            }
-        </footer>
-    </article>
+
+    return (
+        <article className={classItemDetail.containerFather}>
+            <section>
+                <img src={img} alt={name} className={classItemDetail.img} />
+            </section>
+            <section className={classItemDetail.containerImg}>
+                <h2 className={classItemDetail.titleP}>
+                    {name}
+                </h2>
+                <div className={classItemDetail.containerInfoP}>
+                    <p className={classItemDetail.price}>
+                       ${price} USD
+                    </p>
+                    <p>
+                        {`Category: ${category}`}
+                    </p>
+                    <p>
+                        {`Description: ${description}`}
+                    </p>
+
+                </div>
+                {
+                    total === 0 ? (
+                        <ItemCount onAdd={handleOnAdd} stock={stock} />
+                    ) : (
+                        <Link to='/cart'>Finalize Purchase</Link>
+                    )
+                }
+            </section>
+        </article>
     )
 }
+
 export default ItemDetail

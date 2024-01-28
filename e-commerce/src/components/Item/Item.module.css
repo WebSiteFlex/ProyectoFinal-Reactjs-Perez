@@ -24,7 +24,7 @@
     text-transform: uppercase;
     text-align: center;
     border: 1px solid white;
-    transition: all 0.4s linear;
+    transition: all 0.2s linear;
 }
 
 .viewDetail:hover{
@@ -34,3 +34,9 @@
    border: 2px black solid ;
    border-radius: 12px;
 }
+.stockI{
+    color: blueviolet;
+    font-size:19px;
+    font-weight: 700;
+}
+

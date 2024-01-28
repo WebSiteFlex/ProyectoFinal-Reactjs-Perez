@@ -1,0 +1,30 @@
+.containerFather{
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.img{
+    width: 500px;
+    height: 600px;
+    object-fit: contain;
+    border: 1px solid grey;
+}
+.titleP{
+    text-align: left;
+    text-shadow: 0 0 10px white ;
+    font-weight: 500;
+    font-size: 30px;
+}
+.price{
+    font-size: 40px;
+    font-weight: 700;
+    opacity: 90%;
+}
+.containerInfoP{
+    width: 300px;
+    height: auto;
+    padding: 15px;
+    border: 1px solid white;
+}

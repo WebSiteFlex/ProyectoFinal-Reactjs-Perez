@@ -1,4 +1,6 @@
 .containerP{
+    width: 100%;
+    height: auto;
     display: grid;
     grid-template-columns: repeat(3,2fr);
     gap: 2px;

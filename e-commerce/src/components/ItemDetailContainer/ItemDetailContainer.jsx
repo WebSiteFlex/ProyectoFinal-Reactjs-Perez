@@ -1,30 +1,55 @@
-import classDetail from "./ItemDetailContainer.module.css"
 import { useState, useEffect } from "react"
-import { getThirdProductsById } from "../../asyncMock"
+import { getProductById } from "../../asyncMock"
 import { useParams } from "react-router-dom"
 import ItemDetail from "../ItemDetail/ItemDetail"
+import classDetail from "./ItemDetailContainer.module.css"
 
 const ItemDetailContainer = () => {
-    const [detailProduct, setDetailProduct] = useState({})
-    const { pId } = useParams()
+    const [loading, setLoading] = useState(true)
+    const [product, setProduct] = useState(null)
+
+    const { id } = useParams()
 
     useEffect(() => {
-        getThirdProductsById(pId)
-            .then(result => {
-                setDetailProduct(result)
-            })
-    }, [pId])
+        if(product){
+            document.title = product.name   
+        } else if( !product){
+            console.error("is this products exist?")
+        }
+        
+        return () => {
+            document.title = 'e-commerce'
+        }
+    },[])
 
-    if (!detailProduct) {
-        return <h4>The product is don't exist</h4>
+    useEffect(() => {
+        setLoading(true)
+
+        getProductById(id)
+            .then(response => {
+                setProduct(response)
+            }, err => console.log("check this error in item-detail-container", err))
+            .catch(error => {
+                console.error(error)
+            })
+            .finally(() => {
+                setLoading(false)
+            })
+    }, [id])
+
+    if(loading) {
+        return <h1>loading products...</h1>
     }
+
+    else if(!product) {
+        return <h1>this product not exist</h1>
+    }
+
     return (
-        <>
-            <h1>product details</h1>
-            <div>
-               <ItemDetail {...detailProduct}/>
-            </div>
-        </>
+        <div className={classDetail.containerInfo}>
+            <h1 className={classDetail.titleDetail}>Detail of product</h1>
+            <ItemDetail {...product} />
+        </div>
     )
 }
 

@@ -1,28 +1,27 @@
-import { useState } from "react"
+import { useState } from 'react'
+import classItemCount from "./ItemCount.module.css"
+const ItemCount = ({  stock, onAdd }) => {
+    const [count, setCount] = useState(0)
 
-const ItemCount = ({onAdd, stock}) =>{
-    const {counter, setCounter} = useState(0)
-
-
-const incrementValue = () =>{
-    if(counter < stock ){
-        setCounter(counter + 1)
+    const decrement = () => {
+        if(count > 1) {
+            setCount(count - 1)
+        }
     }
-}
 
-const decrementValue = () =>{
-    if(counter > 0){
-        setCounter( counter -1)
+    const increment = () => {
+        if(count < stock)
+        setCount(count + 1)
     }
+
+    return (
+        <div>
+            <h1 className={classItemCount.titleCount}>Products added: {count}</h1>
+            <button onClick={decrement}>-</button>
+            <button onClick={() => onAdd(count)} className={classItemCount.addToCart}>add to cart</button>
+            <button onClick={increment}>+</button>
+        </div>
+    )
 }
 
-return(
-    <div>
-            <button onClick={decrementValue}>-</button>
-            <span>{counter}</span>
-            <button onClick={incrementValue}>+</button>
-            <button onClick={()=> onAdd(counter)}>add to cart</button>
-    </div>
-)
-}
 export default ItemCount

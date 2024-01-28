@@ -1,0 +1,14 @@
+.titleDetail{
+    text-align: center;
+    text-transform: uppercase;
+}
+.containerInfo{
+    background-color: black;
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
