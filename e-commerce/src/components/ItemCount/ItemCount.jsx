@@ -1,37 +1,28 @@
 import { useState } from "react"
-import classItem from "./ItemCount.module.css"
+
+const ItemCount = ({onAdd, stock}) =>{
+    const {counter, setCounter} = useState(0)
 
 
-const ItemCount = ({ stock, onAdd, start }) => {
-    const [amount, setAmount] = useState(start)
-
-    const increment = () => {
-        if (amount < stock) {
-            setAmount(amount + 1)
-        }
+const incrementValue = () =>{
+    if(counter < stock ){
+        setCounter(counter + 1)
     }
-    const decrement = () => {
-        if (amount > 1) {
-            setAmount(amount - 1)
-        }
-    }
-
-       
-
-    return (
-        <section className={classItem.containerCounter}>
-            <div className={classItem.containerImportant}>
-                <button onClick={decrement} className={classItem.bLeft}>-</button>
-                <h4 className={classItem.h4}>{amount}</h4>
-                <button onClick={increment} className={classItem.bRight}>+</button>
-            </div>
-
-            <div className={classItem.containerAddCart}>
-                <button className={classItem.addCart} onClick={() => onAdd(amount)}>Add to Cart</button>
-            </div>
-        </section>
-
-    )
 }
 
+const decrementValue = () =>{
+    if(counter > 0){
+        setCounter( counter -1)
+    }
+}
+
+return(
+    <div>
+            <button onClick={decrementValue}>-</button>
+            <span>{counter}</span>
+            <button onClick={incrementValue}>+</button>
+            <button onClick={()=> onAdd(counter)}>add to cart</button>
+    </div>
+)
+}
 export default ItemCount

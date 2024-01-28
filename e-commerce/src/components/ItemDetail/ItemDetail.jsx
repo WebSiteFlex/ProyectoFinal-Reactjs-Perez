@@ -1,31 +1,50 @@
-import classID from "./ItemDetail.module.css"
+import {useState} from "react"
+import {Link} from "react-router-dom"
 import ItemCount from "../ItemCount/ItemCount"
-import Swal from 'sweetalert2'
+import {useCart} from "../Cart/Cart"
 
-const ItemDetail = (product) => {
-    return (
-        <div>
-            <div>
-                <img src={product.img} alt="img" />
-            </div>
-            <div key={product.id}>
-                <h1>{product.nameP}</h1>
-                <p>{product.description}</p>
-                <ItemCount start={1} stock={20} onAdd={(quantity) => {
+const ItemDetail = (id,nameP,price,description,category,img,stock) =>{
+    const [total, setTotal] = useState(0)
+    const {addingItem} = useCart()
 
-                    Swal.fire({
-                        title: "Aggregate amount",
-                        text: quantity,
-                        icon: "success"
-                    })
-
-                    localStorage.setItem("Stock", quantity);
-                }
-
-                }></ItemCount>
-            </div>
-        </div>
+    const handleOnAdd = (total) =>{
+        const productParts = {
+            id,nameP,price,total
+        }
+        addingItem(productParts)
+        setTotal(total)
+    }
+    return(
+        <article>
+        <header>
+            <h2>
+                {`name: ${nameP}`}
+            </h2>
+        </header>
+        <picture>
+            <img src={img} alt={nameP} style={{ width: 100}}/>
+        </picture>
+        <section>
+            <p>
+                {`Category: ${category}`}
+            </p>
+            <p>
+             {`Description: ${description}`}
+            </p>
+            <p>
+             {`Price: ${price}`}
+            </p>
+        </section>           
+        <footer>
+            {
+                total === 0 ? (
+                    <ItemCount onAdd={handleOnAdd} stock={stock}/>
+                ) : (
+                    <Link to='/cart'>finalize purchase</Link>
+                )
+            }
+        </footer>
+    </article>
     )
 }
-
 export default ItemDetail

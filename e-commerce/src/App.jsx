@@ -1,24 +1,22 @@
 import NavBar from "./components/NavBar/NavBar"
-import {BrowserRouter,Routes,Route} from "react-router-dom"
-import 'bootstrap/dist/css/bootstrap.min.css'
 import ItemListContainer from "./components/ItemListContainer/ItemListContainer"
+import { BrowserRouter,Routes,Route } from "react-router-dom"
 import ItemDetailContainer from "./components/ItemDetailContainer/ItemDetailContainer"
-import './App.css'
 import './App.css'
 
 function App() {
-
+ 
 
   return (
     <>
-        <BrowserRouter>
-              <NavBar></NavBar>
-            <Routes>
-              <Route path="/" element={ <ItemListContainer/>}/>
-              <Route path="/category/:categoryId" element={ <ItemListContainer/>}/>
-              <Route path="/detail/:id" element={<ItemDetailContainer/>}/>
-              <Route path="*" element={<h3>Error 404</h3>}/>
-            </Routes>
+      <BrowserRouter>
+        <NavBar/>
+       <Routes>
+        <Route path="/" element={<ItemListContainer></ItemListContainer>}></Route>
+        <Route path="/category/:category" element={<ItemListContainer></ItemListContainer>}></Route>
+        <Route path="/detail/:pId" element={<ItemDetailContainer></ItemDetailContainer>}></Route>
+        <Route path="*" element={<h4>Error 404</h4>}> </Route>
+       </Routes>
       </BrowserRouter>
     </>
   )

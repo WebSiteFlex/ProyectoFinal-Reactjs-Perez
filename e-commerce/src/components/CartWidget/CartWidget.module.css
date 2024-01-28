@@ -5,6 +5,8 @@
     justify-content: space-around;
     align-items: center;
 }
-.containerCart img{
-    cursor: pointer;
+
+
+.img{
+    cursor: pointer; 
 }
