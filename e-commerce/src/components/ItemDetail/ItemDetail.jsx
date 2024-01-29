@@ -50,7 +50,7 @@ const ItemDetail = ({ id, name, category, img, price, stock, description }) => {
                     total === 0 ? (
                         <ItemCount onAdd={handleOnAdd} stock={stock} />
                     ) : (
-                        <Link to='/cart'>Finalize Purchase</Link>
+                        <Link to='/cart' className={classItemDetail.finalizePurchase}>Finalize Purchase</Link>
                     )
                 }
             </section>

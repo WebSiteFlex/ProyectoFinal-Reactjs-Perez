@@ -1,4 +1,5 @@
 import { useState, createContext, useContext } from "react"
+import Swal from "sweetalert2"
 
 const CartContext = createContext({
     cart: [],
@@ -9,15 +10,19 @@ const CartContext = createContext({
     clearCart: () => {}
 })
 
+//create const
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([])
-    console.log(cart)
     
     const addItem = (productToAdd) => {
       if(!isInCart(productToAdd.id)) {
-        setCart(prev => [...prev, productToAdd])
-      } else {
-        console.error('this product was added')
+        setCart(prod => [...prod, productToAdd])
+      } else if(isInCart.length > 0) {
+        Swal.fire({
+          title: "The product was added?",
+          text: "do you want to add it again?",
+          icon: "question"
+        })
       }
     }
   
@@ -25,16 +30,16 @@ export const CartProvider = ({ children }) => {
       return cart.some(prod => prod.id === id)
     }
   
-    const removeItem = (id) => {
-      const cartUpdated = cart.filter(prod => prod.id === id)
-      setCart(cartUpdated)
+    const removingItem = (id) => {
+      const cartToUpdate = cart.filter(prod => prod.id === id)
+      setCart(cartToUpdate)
     }
 
     const getTotalQuantity = () => {
         let count = 0
 
         cart.forEach(prod => {
-            count += prod.quantity
+            count += prod.total
         })
 
         return count
@@ -53,7 +58,7 @@ export const CartProvider = ({ children }) => {
     }
 
     return (
-        <CartContext.Provider value={{ cart, addItem, removeItem, totalQuantity, total, clearCart }}>
+        <CartContext.Provider value={{ cart, addItem, removingItem , totalQuantity, total, clearCart }}>
             { children }
         </CartContext.Provider>
     )

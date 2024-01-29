@@ -50,10 +50,10 @@ export const getProductsByCategory = (category) => {
 };
 
 export const getProductById = (id) => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve(listProducts.find((prod) => prod.id === id));
-      reject(console.error("ocurred any error in function getId"));
+
     }, 1000);
   });
 };
