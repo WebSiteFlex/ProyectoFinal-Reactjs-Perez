@@ -1,16 +1,16 @@
 import { useState, createContext, useContext } from "react"
-import Swal from "sweetalert2"
+
 
 const CartContext = createContext({
     cart: [],
     addItem: () => {},
-    removeItem: () => {},
+    removingItem: () => {},
     totalQuantity: 0,
     total: 0,
     clearCart: () => {}
 })
 
-//create const
+//create cartProvider
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([])
     
@@ -18,10 +18,7 @@ export const CartProvider = ({ children }) => {
       if(!isInCart(productToAdd.id)) {
         setCart(prod => [...prod, productToAdd])
       } else{
-        // Swal.fire({
-        //   title: "The product was added?",
-        //   text: "do you want to add it again?",
-        //   icon: "question"
+       
           console.warn("this product was already added")
         }
       }
@@ -49,7 +46,13 @@ export const CartProvider = ({ children }) => {
     const totalQuantity = getTotalQuantity()
 
     const getTotal = () => {
+      let count = 0
 
+      cart.forEach(prod => {
+          count += prod.total * prod.price
+      })
+
+      return count
     }
 
     const total = getTotal()

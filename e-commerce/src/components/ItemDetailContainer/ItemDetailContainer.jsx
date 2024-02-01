@@ -16,9 +16,10 @@ const ItemDetailContainer = () => {
         if (product) {
             document.title = product.name
         }
-        // } else if( !product){
-        //     console.error("is it product exist?")
+        // }  else if (!product) {
+        //     return <h1 className={classDetail.notExist}>this product not exist <img src={sorryImgD} alt="icon" className={classDetail.igmSorry} /> </h1>
         // }
+
 
         return () => {
             document.title = 'e-commerce'
@@ -55,10 +56,6 @@ const ItemDetailContainer = () => {
 
     if (loading) {
         return <h1>loading products...</h1>
-    }
-
-    else if (!product) {
-        return <h1 className={classDetail.notExist}>this product not exist <img src={sorryImgD} alt="icon" className={classDetail.igmSorry} /> </h1>
     }
 
     return (

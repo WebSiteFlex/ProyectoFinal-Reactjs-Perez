@@ -20,7 +20,7 @@ export const NotificationProvider = ({ children }) => {
         icon: "success",
         title: notificationText,
         showConfirmButton: false,
-        timer: 1400,
+        timer: 1800,
       })
       setNotificationText("");
     }
