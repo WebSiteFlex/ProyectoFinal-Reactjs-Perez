@@ -17,14 +17,15 @@ export const CartProvider = ({ children }) => {
     const addItem = (productToAdd) => {
       if(!isInCart(productToAdd.id)) {
         setCart(prod => [...prod, productToAdd])
-      } else if(isInCart.length > 0) {
-        Swal.fire({
-          title: "The product was added?",
-          text: "do you want to add it again?",
-          icon: "question"
-        })
+      } else{
+        // Swal.fire({
+        //   title: "The product was added?",
+        //   text: "do you want to add it again?",
+        //   icon: "question"
+          console.warn("this product was already added")
+        }
       }
-    }
+    
   
     const isInCart = (id) => {
       return cart.some(prod => prod.id === id)

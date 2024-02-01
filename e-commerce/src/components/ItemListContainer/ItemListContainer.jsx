@@ -48,7 +48,6 @@ const ItemListContainer = () => {
             <h2 className={classItemC.subtitle}>UP TO 50% OFF</h2>
             <div className={classItemC.containerProducts}>
                 <ItemList products={products} />
-
             </div>
         </div>
     )
