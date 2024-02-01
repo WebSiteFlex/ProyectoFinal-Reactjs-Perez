@@ -3,26 +3,25 @@ import { Link } from 'react-router-dom'
 import ItemCount from '../ItemCount/ItemCount'
 import { useCart } from "../../Context/Context"
 import classItemDetail from "./ItemDetail.module.css"
-import Swal from 'sweetalert2'
+// import Swal from 'sweetalert2'
+import {useNotification} from "../../Notifications/Notifications"
 
 const ItemDetail = ({ id, name, category, img, price, stock, description }) => {
     const [total, setTotal] = useState(0)
 
     const { addItem } = useCart()
+    const { showNotification } = useNotification()
 
     const handleOnAdd = (total) => {
-        const objProductToAdd = {
-            id, name, price, total
-        }
-        addItem(objProductToAdd)
-        Swal.fire({
-            title: "Aggregate amount",
-            text: total,
-            icon: "success"
-        })
-        setTotal(total)
-        
-
+      const objProductToAdd = {
+        id,
+        name,
+        price,
+        total,
+      }
+      addItem(objProductToAdd);
+      showNotification(`Added ${total} The product ${name}`);
+      setTotal(total);
     }
 
     return (
