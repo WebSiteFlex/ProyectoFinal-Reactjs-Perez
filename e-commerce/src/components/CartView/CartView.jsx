@@ -1,34 +1,43 @@
-import { useCart } from "../../Context/Context";
-import { Link } from "react-router-dom";
+import { useCart } from "../../Context/Context"
+import { Link } from "react-router-dom"
+import classCart from "./CartView.module.css"
+
 
 const CartView = () => {
-    const { cart, total, totalQuantity, removingItem } = useCart();
+    const { cart, total, removeItem } = useCart();
 
     return (
         <>
-            <h1>Shop Cart</h1>
-            <div>
-                {cart.map((callProd) => {
-                    return (
-                        <div key={callProd.id}>
-                            <div>
-                                <img src={callProd.img} alt="imgProducts" />
+            <h1 className={classCart.tittle}>Shop Cart</h1>
+            <section className={classCart.containerComponents}>
+                <div>
+                    {cart.map((callProd) => {
+                        return (
+                            <div key={callProd.id} className={classCart.containerProducts}>
+                                <div className={classCart.containerImg}>
+                                    <img src={callProd.img} className={classCart.img} alt="img"/>
+                                </div>
+                                <div>
+                                    <h2 className={classCart.titleP}>info of product</h2>
+                                    <h3>{callProd.name}</h3>
+                                    <h4>{`Total: ${callProd.total}`}</h4>
+                                    <h4>{`Price per unit: $${callProd.price}`}</h4>
+                                    <h4>{`Total amount: $${callProd.total * callProd.price}`}</h4>
+                                </div>
+                                <div className={classCart.containerButtons}>
+                                    <button onClick={() => removeItem(callProd.id)} className={classCart.removeItem}>Remove Product</button>
+                                    <button onClick={() => removeItem(callProd.id)} className={classCart.removeItem}>Save to watch Later</button>
+                                </div>
                             </div>
-                            <h2>{callProd.name}</h2>
-                            <h4>{`Total: ${callProd.total}`}</h4>
-                            <h4>{`Price per unit: $${callProd.price}`}</h4>
-                            <h4>{`Total amount: $${callProd.total * callProd.price}`}</h4>
-                            <button onClick={() => removingItem(prod.id)}>Remove Product</button>
-                        </div>
-                    );
-                })}
-            </div>
-            <section>
-                <span>{`Total: $${total}`}</span>
+                        )
+                    })}
+                </div>
+                <section className={classCart.containerFPurchase}>
+                    <span>{`Total: $${total}`}</span>
+                    <Link to="/checkout" className={classCart.buttonCheckout}>Checkout</Link>
+                </section>
             </section>
-            <section>
-                <Link to="/checkout">Checkout</Link>
-            </section>
+
         </>
     );
 };

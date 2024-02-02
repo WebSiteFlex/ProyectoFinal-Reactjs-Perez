@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import ItemCount from '../ItemCount/ItemCount'
 import { useCart } from "../../Context/Context"
 import classItemDetail from "./ItemDetail.module.css"
-// import Swal from 'sweetalert2'
 import {useNotification} from "../../Notifications/Notifications"
 
 const ItemDetail = ({ id, name, category, img, price, stock, description }) => {
@@ -18,6 +17,7 @@ const ItemDetail = ({ id, name, category, img, price, stock, description }) => {
         name,
         price,
         total,
+        img
       }
       addItem(objProductToAdd);
       showNotification(`Added ${total} The product ${name}`);

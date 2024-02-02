@@ -14,7 +14,6 @@ const Checkout = ()=>{
         <div>
             <h1>checkout</h1>
             <OrderForm onCrate={createOrder}></OrderForm>
-        {/* <button onClick={createOrder}> Generate the order</button> */}
         </div>
     )
 }

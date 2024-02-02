@@ -4,7 +4,7 @@ import { useState, createContext, useContext } from "react"
 const CartContext = createContext({
     cart: [],
     addItem: () => {},
-    removingItem: () => {},
+    removeItem: () => {},
     totalQuantity: 0,
     total: 0,
     clearCart: () => {}
@@ -18,7 +18,6 @@ export const CartProvider = ({ children }) => {
       if(!isInCart(productToAdd.id)) {
         setCart(prod => [...prod, productToAdd])
       } else{
-       
           console.warn("this product was already added")
         }
       }
@@ -28,8 +27,8 @@ export const CartProvider = ({ children }) => {
       return cart.some(prod => prod.id === id)
     }
   
-    const removingItem = (id) => {
-      const cartToUpdate = cart.filter(prod => prod.id === id)
+    const removeItem = (id) => {
+      const cartToUpdate = cart.filter(prod => prod.id !== id)
       setCart(cartToUpdate)
     }
 
@@ -62,7 +61,7 @@ export const CartProvider = ({ children }) => {
     }
 
     return (
-        <CartContext.Provider value={{ cart, addItem, removingItem , totalQuantity, total, clearCart }}>
+        <CartContext.Provider value={{ cart, addItem, removeItem , totalQuantity, total, clearCart }}>
             { children }
         </CartContext.Provider>
     )
