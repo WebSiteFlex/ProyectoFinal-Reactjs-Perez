@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-
+import classOrderForm from "./OrderForm.module.css"
 const OrderForm = ({ onCreate }) => {
     const [userData, setUserData] = useState({
         name: "",
@@ -26,10 +26,11 @@ const OrderForm = ({ onCreate }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
+        <form onSubmit={handleSubmit} className={classOrderForm.form}>
+            <label className={classOrderForm.label}>
                 Name:
                 <input
+                    className={classOrderForm.input}
                     type="text"
                     name="name"
                     id="name"
@@ -39,9 +40,10 @@ const OrderForm = ({ onCreate }) => {
                 />
             </label>
 
-            <label>
+            <label className={classOrderForm.label}>
                 Email:
                 <input
+                    className={classOrderForm.input}
                     type="email"
                     name="email"
                     id="email"
@@ -51,9 +53,10 @@ const OrderForm = ({ onCreate }) => {
                 />
             </label>
 
-            <label>
+            <label className={classOrderForm.label}>
                 Address:
                 <textarea
+                    className={classOrderForm.input}
                     name="address"
                     id="address"
                     value={userData.address}
@@ -61,9 +64,10 @@ const OrderForm = ({ onCreate }) => {
                     required
                 />
             </label>
-            <label>
+            <label className={classOrderForm.label}>
                 Phone:
                 <input
+                    className={classOrderForm.input}
                     type="tel"
                     name="phone"
                     id="phone"
@@ -72,9 +76,10 @@ const OrderForm = ({ onCreate }) => {
                     required
                 />
             </label>
-            <label>
+            <label className={classOrderForm.label}>
                 Cp:
                 <input
+                    className={classOrderForm.input}
                     type="tel"
                     name="cp"
                     id="cp"
@@ -83,9 +88,10 @@ const OrderForm = ({ onCreate }) => {
                     required
                 />
             </label>
-            <label>
+            <label className={classOrderForm.label}>
                 Locality:
                 <input
+                    className={classOrderForm.input}
                     type="text"
                     name="locality"
                     id="locality"
@@ -94,7 +100,9 @@ const OrderForm = ({ onCreate }) => {
                     required
                 />
             </label>
-            <button type="submit">Submit</button>
+            <div className={classOrderForm.containerButton}>
+                <button className={classOrderForm.buttonOrder} type="submit">Send</button>
+            </div>
         </form>
     )
 }

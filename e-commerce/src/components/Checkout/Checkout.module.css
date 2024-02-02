@@ -1,0 +1,19 @@
+.containerForm {
+  width: 50%;
+  height: auto;
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.h1 {
+  text-align: center;
+  font-size: 70px;
+}
+.imgF {
+  width: 100%;
+  height: 700px;
+  object-fit: cover;
+}
