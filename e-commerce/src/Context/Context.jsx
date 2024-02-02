@@ -1,72 +1,73 @@
 import { useState, createContext, useContext } from "react"
 
 
+
 const CartContext = createContext({
-    cart: [],
-    addItem: () => {},
-    removeItem: () => {},
-    totalQuantity: 0,
-    total: 0,
-    clearCart: () => {}
+  cart: [],
+  addItem: () => { },
+  removeItem: () => { },
+  totalQuantity: 0,
+  total: 0,
+  clearCart: () => { }
 })
 
 //create cartProvider
 export const CartProvider = ({ children }) => {
-    const [cart, setCart] = useState([])
-    
-    const addItem = (productToAdd) => {
-      if(!isInCart(productToAdd.id)) {
-        setCart(prod => [...prod, productToAdd])
-      } else{
-          console.warn("this product was already added")
-        }
-      }
-    
-  
-    const isInCart = (id) => {
-      return cart.some(prod => prod.id === id)
+  const [cart, setCart] = useState([])
+
+  const addItem = (productToAdd) => {
+    if (!isInCart(productToAdd.id)) {
+      setCart(prod => [...prod, productToAdd])
+    } else {
+      alert("This Product is Already In Cart")
     }
-  
-    const removeItem = (id) => {
-      const cartToUpdate = cart.filter(prod => prod.id !== id)
-      setCart(cartToUpdate)
-    }
+  }
 
-    const getTotalQuantity = () => {
-        let count = 0
 
-        cart.forEach(prod => {
-            count += prod.total
-        })
+  const isInCart = (id) => {
+    return cart.some(prod => prod.id === id)
+  }
 
-        return count
-    }
+  const removeItem = (id) => {
+    const cartToUpdate = cart.filter(prod => prod.id !== id)
+    setCart(cartToUpdate)
+  }
 
-    const totalQuantity = getTotalQuantity()
+  const getTotalQuantity = () => {
+    let count = 0
 
-    const getTotal = () => {
-      let count = 0
+    cart.forEach(prod => {
+      count += prod.total
+    })
 
-      cart.forEach(prod => {
-          count += prod.total * prod.price
-      })
+    return count
+  }
 
-      return count
-    }
+  const totalQuantity = getTotalQuantity()
 
-    const total = getTotal()
+  const getTotal = () => {
+    let count = 0
 
-    const clearCart = () => {
-        setCart([])
-    }
+    cart.forEach(prod => {
+      count += prod.total * prod.price
+    })
 
-    return (
-        <CartContext.Provider value={{ cart, addItem, removeItem , totalQuantity, total, clearCart }}>
-            { children }
-        </CartContext.Provider>
-    )
+    return count
+  }
+
+  const total = getTotal()
+
+  const clearCart = () => {
+    setCart([])
+  }
+
+  return (
+    <CartContext.Provider value={{ cart, addItem, removeItem, totalQuantity, total, clearCart }}>
+      {children}
+    </CartContext.Provider>
+  )
 }
 
 export const useCart = () => {
-    return useContext(CartContext)
+  return useContext(CartContext)
 }
