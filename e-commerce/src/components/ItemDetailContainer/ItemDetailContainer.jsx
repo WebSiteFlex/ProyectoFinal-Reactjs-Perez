@@ -4,8 +4,8 @@ import { useParams } from "react-router-dom"
 import ItemDetail from "../ItemDetail/ItemDetail"
 import classDetail from "./ItemDetailContainer.module.css"
 import sorryImgD from "./assets/sorry.png"
-import { db } from "../../fireBaseService/FireBase/FireBaseConfig"
-import { getDoc, doc } from "firebase/firestore"
+import { obtainById } from "../../fireBaseService/FireBase/fireStore/obtainProducts"
+
 const ItemDetailContainer = () => {
     const [loading, setLoading] = useState(true)
     const [product, setProduct] = useState(null)
@@ -29,29 +29,14 @@ const ItemDetailContainer = () => {
     useEffect(() => {
         setLoading(true)
 
-        const document = doc(db, "listProducts", id)
-        getDoc(document)
+        obtainById(id)
             .then(resolve => {
-                const docFields = resolve.data()
-                const documentUpdated = {
-                    id: resolve.id, ...docFields
-                }
-                setProduct(documentUpdated)
-            })
-
+                setProduct(resolve)
+            }, otherErr => console.warn(otherErr))
+            .catch(error => console.log(error))
             .finally(() => {
                 setLoading(false)
             })
-        // getProductById(id)
-        //     .then(response => {
-        //         setProduct(response)
-        //     }, err => console.log("check this error in item-detail-container", err))
-        //     .catch(error => {
-        //         console.error(error)
-        //     })
-        //     .finally(() => {
-        //         setLoading(false)
-        //     })
     }, [id])
 
     if (loading) {

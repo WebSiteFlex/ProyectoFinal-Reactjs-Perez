@@ -79,7 +79,7 @@ const Checkout = () => {
             <div className={classForm.containerForm }> 
                 <img src={imgTraveler} alt="img-Form" className={classForm.imgF} />
                 <OrderForm onCreate={createOrder} /></div>
-            {order && <h1>Your order ID is: {order}</h1>}
+            {order && <h1 className={classForm.id}>Your order ID is: {order}</h1>}
         </div>
     )
 }

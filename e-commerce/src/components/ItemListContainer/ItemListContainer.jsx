@@ -3,8 +3,7 @@ import { useState, useEffect } from "react"
 import ItemList from "../ItemList/ItemList"
 import { useParams } from "react-router-dom"
 import classItemC from "./ItemListContainer.module.css"
-import { getDocs, collection, query, where } from "firebase/firestore"
-import { db } from "../../fireBaseService/FireBase/FireBaseConfig"
+import { obtainProducts } from "../../fireBaseService/FireBase/fireStore/obtainProducts"
 
 const ItemListContainer = () => {
     const [loading, setLoading] = useState(true)
@@ -23,43 +22,14 @@ const ItemListContainer = () => {
     useEffect(() => {
         setLoading(true)
         //link category id with the dataBase
-        const pCollection = category ? query(collection(db, "listProducts"), where("category", "==", category))
-            : collection(db, "listProducts")
-
-        getDocs(pCollection)
-            .then(querySnapshot => {
-                const productUpdated = querySnapshot.docs.map(doc => {
-                    const getFields = doc.data()
-                    return {
-                        id: doc.id,
-                        ...getFields
-                    }
-                })
-
-                setProducts(productUpdated)
-
-            }, err => console.error(err))
-
+        obtainProducts(category)
+            .then(resolve => {
+                setProducts(resolve)
+            }, otherErr => console.warn(otherErr))
             .catch(error => console.log(error))
-
             .finally(() => {
                 setLoading(false)
             })
-
-
-        // const obtainList = category ? getProductsByCategory : getProducts
-
-        // obtainList(category)
-        //     .then(response => {
-        //         setProducts(response)
-        //     }, warn => console.log(warn))
-        //     .catch(error => {
-        //         console.error(error)
-        //     })
-        //     .finally(() => {
-        //         setLoading(false)
-        //     })
-        
     }, [category])
 
 

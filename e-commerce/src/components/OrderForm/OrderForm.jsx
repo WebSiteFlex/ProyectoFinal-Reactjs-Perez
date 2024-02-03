@@ -55,7 +55,7 @@ const OrderForm = ({ onCreate }) => {
 
             <label className={classOrderForm.label}>
                 Address:
-                <textarea
+                <input
                     className={classOrderForm.input}
                     name="address"
                     id="address"
