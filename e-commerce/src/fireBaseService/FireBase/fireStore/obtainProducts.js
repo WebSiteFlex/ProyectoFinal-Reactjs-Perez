@@ -38,6 +38,4 @@ export const obtainById = (id)=>{
             return documentUpdated
         })
         .catch(err=> console.warn(err))
-
-      
 }
