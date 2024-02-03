@@ -1,6 +1,6 @@
 # THENORTHPOLE
 -------------------------------------------------------------------------------------
-Es un e-coomerce de mochilas para tus viajes , con un diseños simple claro y llamativo
+Es un e-coomerce de mochilas para tus viajes , con un diseño simple claro y llamativo
 
 ### Pasos de instalación
 
