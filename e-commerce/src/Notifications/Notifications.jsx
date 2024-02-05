@@ -12,6 +12,14 @@ export const NotificationProvider = ({ children }) => {
   const showNotification = (text) => {
     setNotificationText(text)
   }
+  const showNotificationError = (text2, id) => {
+    Swal.fire({
+      icon: "warning",
+      title: text2,
+      text: `Product ${id} added`,
+      showConfirmButton: true,
+    })
+  }
 
   useEffect(() => {
     if (notificationText) {
@@ -32,10 +40,10 @@ export const NotificationProvider = ({ children }) => {
       })
       setNotificationText("");
     }
-  }, [notificationText]);
+  }, [notificationText])
 
   return (
-    <NotificationContext.Provider value={{ showNotification }}>
+    <NotificationContext.Provider value={{ showNotification, showNotificationError }}>
       {children}
     </NotificationContext.Provider>
   )

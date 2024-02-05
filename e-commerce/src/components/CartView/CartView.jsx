@@ -28,7 +28,7 @@ const CartView = () => {
                                     <h4>{`Total amount: $${callProd.total * callProd.price}`}</h4>
                                 </div>
                                 <div className={classCart.containerButtons}>
-                                    <button onClick={() => {removeItem(callProd.id), showNotification("product removed")}} className={classCart.removeItem}>Remove Product</button>
+                                    <button onClick={() => {removeItem(callProd.id), showNotification("product withdrawn")}} className={classCart.removeItem}>Remove Product</button>
                                 </div>
                             </div>
                         )
