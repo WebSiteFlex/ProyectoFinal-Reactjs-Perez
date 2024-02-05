@@ -1,4 +1,5 @@
 import { useState, createContext, useContext } from "react"
+import { useNotification} from "../Notifications/Notifications"
 
 
 
@@ -15,11 +16,14 @@ const CartContext = createContext({
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([])
 
+  const {showNotification} = useNotification()
+
   const addItem = (productToAdd) => {
     if (!isInCart(productToAdd.id)) {
       setCart(prod => [...prod, productToAdd])
     } else {
       alert("This Product is Already In Cart")
+      showNotification = []
     }
   }
 
@@ -32,6 +36,7 @@ export const CartProvider = ({ children }) => {
     const cartToUpdate = cart.filter(prod => prod.id !== id)
     setCart(cartToUpdate)
   }
+ 
 
   const getTotalQuantity = () => {
     let count = 0
@@ -62,7 +67,7 @@ export const CartProvider = ({ children }) => {
   }
 
   return (
-    <CartContext.Provider value={{ cart, addItem, removeItem, totalQuantity, total, clearCart }}>
+    <CartContext.Provider value={{ cart, addItem, removeItem, totalQuantity, total, clearCart}}>
       {children}
     </CartContext.Provider>
   )

@@ -1,11 +1,14 @@
 import { useCart } from "../../Context/Context"
 import { Link } from "react-router-dom"
 import classCart from "./CartView.module.css"
-
+import { useNotification } from "../../Notifications/Notifications"
 
 const CartView = () => {
-    const { cart, total, removeItem } = useCart();
+    const { cart, total, removeItem } = useCart()
+    const {showNotification} = useNotification()
 
+
+   
     return (
         <>
             <h1 className={classCart.tittle}>Shop Cart</h1>
@@ -25,8 +28,7 @@ const CartView = () => {
                                     <h4>{`Total amount: $${callProd.total * callProd.price}`}</h4>
                                 </div>
                                 <div className={classCart.containerButtons}>
-                                    <button onClick={() => removeItem(callProd.id)} className={classCart.removeItem}>Remove Product</button>
-                                    <button onClick={() => removeItem(callProd.id)} className={classCart.removeItem}>Save to watch Later</button>
+                                    <button onClick={() => {removeItem(callProd.id), showNotification("product removed")}} className={classCart.removeItem}>Remove Product</button>
                                 </div>
                             </div>
                         )
