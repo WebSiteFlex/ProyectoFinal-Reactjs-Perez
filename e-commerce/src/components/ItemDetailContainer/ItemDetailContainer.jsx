@@ -6,6 +6,7 @@ import classDetail from "./ItemDetailContainer.module.css"
 import sorryImgD from "./assets/sorry.png"
 import { obtainById } from "../../fireBaseService/FireBase/fireStore/obtainProducts"
 
+
 const ItemDetailContainer = () => {
     const [loading, setLoading] = useState(true)
     const [product, setProduct] = useState(null)
@@ -16,9 +17,7 @@ const ItemDetailContainer = () => {
         if (product) {
             document.title = product.name
         }
-        // }  else if (!product) {
-        //     return <h1 className={classDetail.notExist}>this product not exist <img src={sorryImgD} alt="icon" className={classDetail.igmSorry} /> </h1>
-        // }
+
 
 
         return () => {
@@ -31,7 +30,12 @@ const ItemDetailContainer = () => {
 
         obtainById(id)
             .then(resolve => {
-                setProduct(resolve)
+                if (resolve) {
+                    setProduct(resolve)
+                } else  {
+                    setProduct(null)
+                }
+
             }, otherErr => console.warn(otherErr))
             .catch(error => console.log(error))
             .finally(() => {
@@ -41,6 +45,10 @@ const ItemDetailContainer = () => {
 
     if (loading) {
         return <h1>loading products...</h1>
+    }
+
+    if( product === null){
+        return  <h1 className={classDetail.notExist}>this product not exist <img src={sorryImgD} alt="icon" className={classDetail.igmSorry} /> </h1>
     }
 
     return (

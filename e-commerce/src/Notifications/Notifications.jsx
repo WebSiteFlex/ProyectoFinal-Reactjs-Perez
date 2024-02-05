@@ -12,6 +12,9 @@ export const NotificationProvider = ({ children }) => {
   const showNotification = (text) => {
     setNotificationText(text)
   }
+
+
+
   const showNotificationError = (text2, id) => {
     Swal.fire({
       icon: "warning",

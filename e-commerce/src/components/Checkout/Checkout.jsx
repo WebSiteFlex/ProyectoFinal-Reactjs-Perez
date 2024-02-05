@@ -59,11 +59,15 @@ const Checkout = () => {
                 const orderCollection = collection(db, "orders")
                 const newOrderRef = await addDoc(orderCollection, personalInfo)
                 setOrder(newOrderRef.id)
-                
+
                 Swal.fire({
                     position: "center",
                     icon: "success",
+                    text: "Purchase successful!",
                     title: "We have successfully received your order, we will send you all the details by email, thank you very much for your purchase!!!!",
+                    imageUrl: "https://marketplace.canva.com/EAFiV-phzPk/1/0/1600w/canva-tarjeta-gracias-por-tu-compra-moderno-3d-violeta-6aDuN3NLOgg.jpg",
+                    imageWidth: 300,
+                    imageHeight: 300,
                     showConfirmButton: true,
 
                 })
