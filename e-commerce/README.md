@@ -9,6 +9,5 @@ Currently, two official plugins are available:
 
 
 
-*gif reference*
 
-<video src="./video/e-commerce - Brave 2024-02-03 17-51-35.mp4"/>
+

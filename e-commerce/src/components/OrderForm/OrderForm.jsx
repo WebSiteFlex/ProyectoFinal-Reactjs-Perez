@@ -18,11 +18,16 @@ const OrderForm = ({ onCreate }) => {
             [name]: value,
         }))
     }
+    //creating message after client do click in button
 
-    const handleSubmit = (e) => {
+    const [isSubmitting, setIsSubmitting] = useState(false)
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        onCreate(userData)
+        setIsSubmitting(true)
+        await onCreate(userData)
         setUserData({})
+        setIsSubmitting(false)
     }
 
     return (
@@ -101,7 +106,13 @@ const OrderForm = ({ onCreate }) => {
                 />
             </label>
             <div className={classOrderForm.containerButton}>
-                <button className={classOrderForm.buttonOrder} type="submit">Send</button>
+                <button
+                    className={classOrderForm.buttonOrder}
+                    type="submit"
+                    disabled={isSubmitting}
+                >
+                    {isSubmitting ? 'Sending...' : 'Send'}
+                </button>
             </div>
         </form>
     )

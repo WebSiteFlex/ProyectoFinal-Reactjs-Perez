@@ -1,7 +1,7 @@
 import { useCart } from "../../Context/Context"
 import { useState } from "react"
 import OrderForm from "../OrderForm/OrderForm"
-import imgTraveler from"./assets/Traveler.png"
+import imgTraveler from "./assets/Traveler.png"
 import classForm from "./Checkout.module.css"
 import {
     collection,
@@ -17,9 +17,9 @@ import { db } from "../../fireBaseService/FireBase/firebaseConfig"
 import Swal from 'sweetalert2'
 
 const Checkout = () => {
-    const [order, setOrder] = useState(null);
-    const { cart, total } = useCart();
-    const { showNotification } = useNotification();
+    const [order, setOrder] = useState(null)
+    const { cart, total } = useCart()
+    const { showNotification } = useNotification()
 
     const createOrder = async (userData) => {
         try {
@@ -29,8 +29,8 @@ const Checkout = () => {
                 total,
             }
 
-            const batch = writeBatch(db);
-            const outOfStock = [];
+            const batch = writeBatch(db)
+            const outOfStock = []
             const documentPrevIds = cart.map((value) => value.id)
             const collectionOfArrays = query(
                 collection(db, "listProducts"),
@@ -41,7 +41,7 @@ const Checkout = () => {
             const { docs } = snapshot;
 
             docs.forEach((info) => {
-                const productData = info.data();
+                const productData = info.data()
                 const stockQuantity = productData.stock
 
                 const productInCart = cart.find((product) => product.id === info.id)
@@ -55,19 +55,28 @@ const Checkout = () => {
             })
 
             if (outOfStock.length === 0) {
-                batch.commit();
+                batch.commit()
                 const orderCollection = collection(db, "orders")
                 const newOrderRef = await addDoc(orderCollection, personalInfo)
-                setOrder(newOrderRef.id);
+                setOrder(newOrderRef.id)
+                
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "We have successfully received your order, we will send you all the details by email, thank you very much for your purchase!!!!",
+                    showConfirmButton: true,
+
+                })
             } else {
                 Swal.fire({
-                    position: "top-end",
+                    position: "center",
                     icon: "error",
-                    title: "there isn't products in stock",
+                    title: "there aren't products in stock",
                     showConfirmButton: false,
                     timer: 1200
                 })
             }
+
         } catch (error) {
             console.error("Error creating order:", error)
         }
@@ -76,7 +85,7 @@ const Checkout = () => {
     return (
         <div>
             <h1 className={classForm.h1}>Checkout</h1>
-            <div className={classForm.containerForm }> 
+            <div className={classForm.containerForm}>
                 <img src={imgTraveler} alt="img-Form" className={classForm.imgF} />
                 <OrderForm onCreate={createOrder} /></div>
             {order && <h1 className={classForm.id}>Your order ID is: {order}</h1>}
