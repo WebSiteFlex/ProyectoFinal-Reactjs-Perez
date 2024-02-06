@@ -42,7 +42,7 @@ const ItemListContainer = () => {
 
     return (
         <div className={classItemC.containerItem}>
-            <h1 className={classItemC.h1} >detail products</h1>
+            <h1 className={classItemC.h1} >Products</h1>
             <h2 className={classItemC.subtitle}>UP TO 50% OFF</h2>
             <div className={classItemC.containerProducts}>
                 <ItemList products={products} />
