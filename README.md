@@ -4,7 +4,7 @@ Es un e-coomerce de mochilas para tus viajes , con un diseño simple claro y lla
 
 ### Pasos de instalación
 
-instalar los paquetes necesarios para correr la ***aplicación web***
+Instalar los paquetes necesarios para correr la ***aplicación web***
 
 ```
 npm install 
